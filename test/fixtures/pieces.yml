@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  active: false
+  king: false
+  tile_id: MyString
+  player_id: MyString
+  x_coordinate: 1
+  y_coordinate: 1
+
+two:
+  active: false
+  king: false
+  tile_id: MyString
+  player_id: MyString
+  x_coordinate: 1
+  y_coordinate: 1

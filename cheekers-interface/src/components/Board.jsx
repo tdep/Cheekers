@@ -1,18 +1,18 @@
 import Square from "./Square"
+import Piece from "./Piece"
 import { useState } from "react"
 
 const Board = () => {
   const squares = [1, 2, 3, 4, 5, 6, 7, 8] //An array (squares) which is mapped over to create columns. 
-  const [occupied, setOccupied] = useState(false) //A state variable set to false in order to represent whether a square is occupied
-  
-  const handleClick = (e) => { //Used to set whether a square is occupied or not
-    setOccupied(!occupied)
-    return (
-      <>
-        {occupied}
-      </>
-    )
-  }
+  // const [occupied, setOccupied] = useState(false) //A state variable set to false in order to represent whether a square is occupied
+  // const handleClick = (e) => { //Used to set whether a square is occupied or not
+  //   setOccupied(!occupied)
+  //   return (
+  //     <>
+  //       {occupied}
+  //     </>
+  //   )
+  // }
   
   return (
     <div className="play-board">
@@ -38,6 +38,7 @@ const Board = () => {
           )
         })
       }
+      <Piece />
     </div>
   )
 

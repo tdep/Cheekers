@@ -5,6 +5,7 @@ const Square = (xAxis, yAxis) => {
   let coors = xAxis
   let coordinates = `(${coors.xAxis}, ${coors.yAxis})`
   
+
   const handleClick = (e) => {
     setOccupied(!occupied)
   }
