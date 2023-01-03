@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Piece from "./Piece"
 
-const Square = ({xAxis, yAxis, tiles, num}) => {
+const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
   const [occupied, setOccupied] = useState(false)
 
   let coordinates = `(${xAxis}, ${yAxis})`
@@ -12,7 +12,6 @@ const Square = ({xAxis, yAxis, tiles, num}) => {
   //     console.log(tiles[num].x_coordinate, tiles[num].y_coordinate)
   //   )
   // }
-  
   
   const handleClick = async () => {
     let tileId = tiles[num].id
@@ -54,7 +53,13 @@ const Square = ({xAxis, yAxis, tiles, num}) => {
         )
       }}       
     >
-        <Piece tiles={tiles} num={num}/>
+      {pieces.map((piece) => {
+        if(piece.tile_id === tiles[num].id) {
+          return(
+            <Piece tiles={tiles} num={num} pieces={pieces}/>
+          )
+        }
+      })}
     </div>
   )
 }

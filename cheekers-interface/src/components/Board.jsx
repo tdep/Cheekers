@@ -13,6 +13,7 @@ const Board = () => {
   //   )
   // }
   const [tiles, setTiles] = useState([])
+  const [pieces, setPieces] = useState([])
   let num = -1
 
   useEffect(() =>{
@@ -20,6 +21,15 @@ const Board = () => {
       let req = await fetch("http://localhost:3000/tiles")
       let res = await req.json()
       setTiles(res)
+    }
+    request()
+  }, [])
+
+  useEffect(() => {
+    const request = async () => {
+      let req = await fetch("http://localhost:3000/pieces")
+      let res = await req.json()
+      setPieces(res)
     }
     request()
   }, [])
@@ -39,7 +49,7 @@ const Board = () => {
                   { num += 1 }
                   return(
                     <>
-                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} num={num}/> 
+                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} num={num} pieces={pieces}/> 
                     </>
                   )
                 })
