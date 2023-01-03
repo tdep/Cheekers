@@ -1,5 +1,4 @@
 import Square from "./Square"
-import Piece from "./Piece"
 import { useState, useEffect } from "react"
 
 const Board = () => {
@@ -40,7 +39,7 @@ const Board = () => {
                   { num += 1 }
                   return(
                     <>
-                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} x={x} y={y} num={num}/> 
+                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} num={num}/> 
                     </>
                   )
                 })
@@ -49,7 +48,6 @@ const Board = () => {
           )
         })
       }
-      {/* <Piece /> */}
     </div>
   )
 

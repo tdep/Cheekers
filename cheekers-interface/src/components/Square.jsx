@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
+import Piece from "./Piece"
 
-const Square = ({xAxis, yAxis, tiles, x, y, num}) => {
+const Square = ({xAxis, yAxis, tiles, num}) => {
   const [occupied, setOccupied] = useState(false)
 
   let coordinates = `(${xAxis}, ${yAxis})`
@@ -43,20 +44,17 @@ const Square = ({xAxis, yAxis, tiles, x, y, num}) => {
     onClick={handleClick}
     style={{
       background: (
-        (
-          (yAxis % 2 > 0) ? //If y is odd
-          (((yAxis % 2 > 0) && (xAxis % 2 == 0)) ? //If y is odd and x is even
-          "black" : "tan") :
-          ((yAxis % 2 == 0) && (xAxis % 2 > 0)) ? //If y is even and x is odd
-          "black" : "tan"
+          (
+            (yAxis % 2 > 0) ? //If y is odd
+            (((yAxis % 2 > 0) && (xAxis % 2 == 0)) ? //If y is odd and x is even
+            "black" : "tan") :
+            ((yAxis % 2 == 0) && (xAxis % 2 > 0)) ? //If y is even and x is odd
+            "black" : "tan"
+          )
         )
-      )
-    }}
-        
-        >
-        <p>
-        {/* {tiles[num].active?"true":"false"} */}
-      </p>
+      }}       
+    >
+        <Piece />
     </div>
   )
 }

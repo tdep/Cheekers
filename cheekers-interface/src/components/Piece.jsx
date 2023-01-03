@@ -1,14 +1,19 @@
-const Piece = () => {
-  const piece = {
-    start: (1, 1)
-  }
-  
-  const pieceSelect = (e) => {
+import { useState, useEffect} from 'react'
 
-  }
+const Piece = () => {
+  const [pieces, setPieces] = useState([])
+
+  useEffect(() =>{
+    const request = async () => {
+      let req = await fetch("http://localhost:3000/pieces")
+      let res = await req.json()
+      setPieces(res)
+    }
+    request()
+  }, [])
   return (
     <div className="piece">
-      <p>I'm a piece!</p>
+      {console.log(pieces[1])}
     </div>
   )
 }
