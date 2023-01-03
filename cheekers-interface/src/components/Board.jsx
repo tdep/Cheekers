@@ -14,7 +14,7 @@ const Board = () => {
   //   )
   // }
   const [tiles, setTiles] = useState([])
-  let num = 0
+  let num = -1
 
   useEffect(() =>{
     const request = async () => {
@@ -37,11 +37,10 @@ const Board = () => {
             >
               {
                 squares.map((xCoor, x) => { //The second map generates the squares and x-coordinates which are combined with the column numbers to create the coordinates 
-                  
+                  { num += 1 }
                   return(
                     <>
                       <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} x={x} y={y} num={num}/> 
-                      {num += 1}
                     </>
                   )
                 })
