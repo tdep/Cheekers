@@ -1,7 +1,18 @@
 import { useState, useEffect} from 'react'
 
-const Piece = () => {
+const Piece = ({tiles, num}) => {
   const [pieces, setPieces] = useState([])
+
+  const grabPiece = async ()=> {
+    pieces.map((piece) => {
+      if (piece.tile_id === tiles[num].id) {
+        console.log(piece)
+      }
+    })
+  }
+
+  setTimeout(() => {grabPiece()}, 1000)
+
 
   useEffect(() =>{
     const request = async () => {
@@ -13,7 +24,6 @@ const Piece = () => {
   }, [])
   return (
     <div className="piece">
-      {console.log(pieces[1])}
     </div>
   )
 }

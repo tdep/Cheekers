@@ -54,7 +54,7 @@ const Square = ({xAxis, yAxis, tiles, num}) => {
         )
       }}       
     >
-        <Piece />
+        <Piece tiles={tiles} num={num}/>
     </div>
   )
 }
