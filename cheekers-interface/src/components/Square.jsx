@@ -5,18 +5,23 @@ const Square = ({xAxis, yAxis, tiles, x, y, num}) => {
 
   let coordinates = `(${xAxis}, ${yAxis})`
   
-  const test = () => {
-    return(
-      tiles[num].occupied = !tiles[num].occupied,
-      console.log(tiles[num].x_coordinate, tiles[num].y_coordinate)
-    )
-  }
+  // const test = () => {
+  //   return(
+  //     tiles[num].occupied = !tiles[num].occupied,
+  //     console.log(tiles[num].x_coordinate, tiles[num].y_coordinate)
+  //   )
+  // }
   
   
   const handleClick = async () => {
     let tileId = tiles[num].id
+    const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
     let req = await fetch(`http://localhost:3000/tiles/${tileId}`, {
-      method: "PATCH"
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(tileOccupiedObject)
     })
     let res = await req.json()
     if (req.ok) {
@@ -25,7 +30,7 @@ const Square = ({xAxis, yAxis, tiles, x, y, num}) => {
       alert('Somting weent veerty wong')
     }
     setOccupied(!occupied)
-    setTimeout(() => {test()}, 1000)
+    // setTimeout(() => {test()}, 1000)
 
 
   }
