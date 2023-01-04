@@ -1,17 +1,14 @@
 import Square from "./Square"
 import { useState, useEffect } from "react"
 
-const Board = () => {
+const Board = ({
+  selectedPiece, 
+  setSelectedPiece, 
+  selectedTile, 
+  setSelectedTile
+}) => {
+
   const squares = [1, 2, 3, 4] //An array (squares) which is mapped over to create columns. 
-  // const [occupied, setOccupied] = useState(false) //A state variable set to false in order to represent whether a square is occupied
-  // const handleClick = (e) => { //Used to set whether a square is occupied or not
-  //   setOccupied(!occupied)
-  //   return (
-  //     <>
-  //       {occupied}
-  //     </>
-  //   )
-  // }
   const [tiles, setTiles] = useState([])
   const [pieces, setPieces] = useState([])
   let num = -1
@@ -49,7 +46,16 @@ const Board = () => {
                   { num += 1 }
                   return(
                     <>
-                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} num={num} pieces={pieces}/> 
+                      <Square 
+                        xAxis={xCoor} 
+                        yAxis={yCoor} 
+                        tiles={tiles} 
+                        num={num} 
+                        pieces={pieces} 
+                        selectedPiece={selectedPiece} 
+                        setSelectedPiece={setSelectedPiece} 
+                        selectedTile={selectedTile} 
+                        setSelectedTile={setSelectedTile} /> 
                     </>
                   )
                 })

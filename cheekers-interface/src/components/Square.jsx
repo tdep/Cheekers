@@ -1,49 +1,78 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Piece from "./Piece"
 
-const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
-  const [occupied, setOccupied] = useState(false)
-  const [tileSelected, setTileSelected] = useState(false)
-  let opacity = 1.0
-  let coordinates = `(${xAxis}, ${yAxis})`
-  
-  const mouseOver = (e) => {
-    e.target.style.opacity = (opacity - 0.2)
-  }
 
-  const mouseOut = (e) => {
-    e.target.style.opacity = opacity
-  }
-  const handleClick = async () => {
-    let tileId = tiles[num].id
-    // const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
-    const tileSelectedObject = { selected: tiles[num].selected = !tiles[num].selected}
-    let req = await fetch(`http://localhost:3000/tiles/${tileId}`, {
+
+const Square = ({
+  xAxis, 
+  yAxis, 
+  tiles, 
+  num, 
+  pieces, 
+  selectedPiece, 
+  setSelectedPiece, 
+  selectedTile, 
+  setSelectedTile
+}) => {
+  
+  // const [occupied, setOccupied] = useState(false)
+  const [isTileSelected, setIsTileSelected] = useState(false)
+  let opacity = 1.0
+
+  const tileSelector = async () => {
+    let tile = tiles[num]
+    let thisTileId = tile.id
+    // const tileOccupiedObject = { occupied: tiles[num].occupied = occupied }
+    const tileSelectedObject = { selected: tile.selected = !tile.selected } //set selected attribute for tile object
+    let req = await fetch(`http://localhost:3000/tiles/${thisTileId}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(tileSelectedObject)
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(tileSelectedObject) //send the tile object selection attr. to the db
     })
-    console.log('tile:', tiles[num])
     let res = await req.json()
     if (req.ok) {
-      console.log('response is', res)
+      // console.log('response is', res)
     } else {
       alert('Somting weent veerty wong')
     }
-    setTileSelected(!tileSelected)
-    // setTimeout(() => {test()}, 1000)
-
-
+    setSelectedTile([tile])
   }
+
+  const occupyChecker = async (e) => { //prevent selecting a tile twice?
+    let tileElement = e.target
+    if (tileElement.hasChildNodes()) {
+      console.log(tileElement.childNodes[0])
+    } else {
+      tileSelector()
+    }
+  }
+  
+
+
+  const mouseOver = (e) => { //change tile opacity on mouseOver
+    e.target.style.opacity = (opacity - 0.2)
+  }
+
+  const mouseOut = (e) => { //return tile opacity to normal on mouseOut
+    e.target.style.opacity = opacity
+  }
+
+  const handleTileClick = (e) => {
+    occupyChecker(e)
+    setIsTileSelected(!isTileSelected) //is the tile selected?
+    // setTimeout(() => {test()}, 1000)
+  }
+
+
+
+
   return ( 
+
     
     <div
       className="square"
-      id={coordinates} //The id of each square = the coordinate variable 
-      select={!tileSelected ? "false" : "true"} //Sets an occupied property for the element
-      onClick={handleClick}
+      select={!isTileSelected ? "false" : "true"} //Sets an occupied property for the element
+      onClick={handleTileClick}
       onMouseOver={mouseOver}
       onMouseOut={mouseOut}
       style={{
@@ -56,17 +85,24 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
               "black" : "tan"
             )
         ),
-        opacity: (!tileSelected ? opacity : (opacity = opacity - 0.2))
+        // opacity: (!isTileSelected ? opacity : (opacity = opacity - 0.2))
       }}       
     >
       {pieces.map((piece) => {
         if(piece.tile_id === tiles[num].id) {
           return(
-            <Piece tiles={tiles} num={num} pieces={pieces}/>
+            <Piece 
+              tiles={tiles} 
+              num={num} 
+              pieces={pieces} 
+              selectedPiece={selectedPiece} 
+              setSelectedPiece={setSelectedPiece} />
           )
         }
       })}
     </div>
+
+
   )
 }
 
