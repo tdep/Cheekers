@@ -4,20 +4,20 @@ import Piece from "./Piece"
 const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
   const [occupied, setOccupied] = useState(false)
   const [tileSelected, setTileSelected] = useState(false)
-
+  let opacity = 1.0
   let coordinates = `(${xAxis}, ${yAxis})`
   
   const mouseOver = (e) => {
-    e.target.style.opacity = 0.8
+    e.target.style.opacity = (opacity - 0.2)
   }
 
   const mouseOut = (e) => {
-    e.target.style.opacity = 1
+    e.target.style.opacity = opacity
   }
   const handleClick = async () => {
     let tileId = tiles[num].id
     // const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
-    const tileSelectedObject ={ selected: tiles[num].selected = !tiles[num].selected}
+    const tileSelectedObject = { selected: tiles[num].selected = !tiles[num].selected}
     let req = await fetch(`http://localhost:3000/tiles/${tileId}`, {
       method: "PATCH",
       headers: {
@@ -26,12 +26,12 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
       body: JSON.stringify(tileSelectedObject)
     })
     console.log('tile:', tiles[num])
-    // let res = await req.json()
-    // if (req.ok) {
-    //   console.log('response is', res)
-    // } else {
-    //   alert('Somting weent veerty wong')
-    // }
+    let res = await req.json()
+    if (req.ok) {
+      console.log('response is', res)
+    } else {
+      alert('Somting weent veerty wong')
+    }
     setTileSelected(!tileSelected)
     // setTimeout(() => {test()}, 1000)
 
@@ -56,7 +56,7 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
               "black" : "tan"
             )
         ),
-        opacity: (!tileSelected ? 1 : 0.7)
+        opacity: (!tileSelected ? opacity : (opacity = opacity - 0.2))
       }}       
     >
       {pieces.map((piece) => {
