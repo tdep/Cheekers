@@ -24,10 +24,10 @@ tile15 = Tile.create(occupied: false, x_coordinate: 3, y_coordinate: 4)
 tile16 = Tile.create(occupied: false, x_coordinate: 4, y_coordinate: 4)
 
 
-Piece.create(active: true, king: false, tile_id: 2, player_id: 1)
-Piece.create(active: true, king: false, tile_id: 4, player_id: 2)
+Player.create(name: 'Jorb', number: 1, number_pieces: 1)
+Player.create(name: 'Plorp', number: 2, number_pieces: 1)
 
 
 
-player1 = Player.create(name: 'Jorb', number: 1, number_pieces: 1)
-player2 = Player.create(name: 'Plorp', number: 2, number_pieces: 1)
+Piece.create(tile_id: 2, player_id: 1)
+Piece.create(tile_id: 4, player_id: 2)

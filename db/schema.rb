@@ -13,8 +13,9 @@
 ActiveRecord::Schema.define(version: 2023_01_02_025709) do
 
   create_table "pieces", force: :cascade do |t|
-    t.boolean "active"
-    t.boolean "king"
+    t.boolean "active", default: true
+    t.boolean "king", default: false
+    t.boolean "selected", default: false
     t.integer "tile_id"
     t.string "player_id"
     t.datetime "created_at", precision: 6, null: false
