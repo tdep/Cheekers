@@ -6,13 +6,6 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
 
   let coordinates = `(${xAxis}, ${yAxis})`
   
-  // const test = () => {
-  //   return(
-  //     tiles[num].occupied = !tiles[num].occupied,
-  //     console.log(tiles[num].x_coordinate, tiles[num].y_coordinate)
-  //   )
-  // }
-  
   const handleClick = async () => {
     let tileId = tiles[num].id
     const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
@@ -24,11 +17,11 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
       body: JSON.stringify(tileOccupiedObject)
     })
     let res = await req.json()
-    if (req.ok) {
-      console.log('response is', res)
-    } else {
-      alert('Somting weent veerty wong')
-    }
+    // if (req.ok) {
+    //   console.log('response is', res)
+    // } else {
+    //   alert('Somting weent veerty wong')
+    // }
     setOccupied(!occupied)
     // setTimeout(() => {test()}, 1000)
 
