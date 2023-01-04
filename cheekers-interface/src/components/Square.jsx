@@ -1,15 +1,7 @@
 import { useState, useEffect } from 'react'
 import Piece from "./Piece"
 
-const Square = ({
-  xAxis, 
-  yAxis, 
-  tiles, 
-  num, 
-  pieces, 
-  selectedPiece, 
-  setSelectedPiece
-}) => {
+const Square = ({ xAxis, yAxis, tiles, num, pieces }) => {
 
   // const [occupied, setOccupied] = useState(false)
   const [isTileSelected, setIsTileSelected] = useState(false)
@@ -61,7 +53,7 @@ const Square = ({
   }
 
   useEffect(() => {
-    console.log('tile:', selectedTile[0])
+    // console.log('tile:', selectedTile[0])
   }, [selectedTile])
 
 
@@ -94,7 +86,8 @@ const Square = ({
             <Piece 
               tiles={tiles} 
               num={num} 
-              pieces={pieces} />
+              pieces={pieces}
+              id={piece.id} />
           )
         }
       })}

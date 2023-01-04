@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import Board from './components/Board'
 import './App.css'
 
