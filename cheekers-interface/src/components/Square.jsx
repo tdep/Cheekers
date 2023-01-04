@@ -7,15 +7,23 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
 
   let coordinates = `(${xAxis}, ${yAxis})`
   
+  const mouseOver = (e) => {
+    e.target.style.opacity = 0.8
+  }
+
+  const mouseOut = (e) => {
+    e.target.style.opacity = 1
+  }
   const handleClick = async () => {
     let tileId = tiles[num].id
-    const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
+    // const tileOccupiedObject = { occupied: tiles[num].occupied = !tiles[num].occupied }
+    const tileSelectedObject ={ selected: tiles[num].selected = !tiles[num].selected}
     let req = await fetch(`http://localhost:3000/tiles/${tileId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(tileOccupiedObject)
+      body: JSON.stringify(tileSelectedObject)
     })
     console.log('tile:', tiles[num])
     // let res = await req.json()
@@ -32,20 +40,23 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
   return ( 
     
     <div
-    className="square"
-    id={coordinates} //The id of each square = the coordinate variable 
-    select={!tileSelected ? "false" : "true"} //Sets an occupied property for the element
-    onClick={handleClick}
-    style={{
-      background: (
-          (
-            (yAxis % 2 > 0) ? //If y is odd
-            (((yAxis % 2 > 0) && (xAxis % 2 == 0)) ? //If y is odd and x is even
-            "black" : "tan") :
-            ((yAxis % 2 == 0) && (xAxis % 2 > 0)) ? //If y is even and x is odd
-            "black" : "tan"
-          )
-        )
+      className="square"
+      id={coordinates} //The id of each square = the coordinate variable 
+      select={!tileSelected ? "false" : "true"} //Sets an occupied property for the element
+      onClick={handleClick}
+      onMouseOver={mouseOver}
+      onMouseOut={mouseOut}
+      style={{
+        background: (
+            (
+              (yAxis % 2 > 0) ? //If y is odd
+              (((yAxis % 2 > 0) && (xAxis % 2 == 0)) ? //If y is odd and x is even
+              "black" : "tan") :
+              ((yAxis % 2 == 0) && (xAxis % 2 > 0)) ? //If y is even and x is odd
+              "black" : "tan"
+            )
+        ),
+        opacity: (!tileSelected ? 1 : 0.7)
       }}       
     >
       {pieces.map((piece) => {

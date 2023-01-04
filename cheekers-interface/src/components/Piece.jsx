@@ -25,11 +25,7 @@ const Piece = ({tiles, num, pieces}) => {
       className="piece"
       select={!pieceSelected ? "false" : "true"}
       onClick={pieceSelector}
-      style={{
-        background: (
-          pieceSelected ? "darkred" : "red"
-        )
-      }}
+      style={{background: (!pieceSelected ? "red" : "darkred")}}
     >
     </div>
   )
