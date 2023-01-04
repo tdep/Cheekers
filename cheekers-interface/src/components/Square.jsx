@@ -1,7 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Piece from "./Piece"
-
-
 
 const Square = ({
   xAxis, 
@@ -10,13 +8,12 @@ const Square = ({
   num, 
   pieces, 
   selectedPiece, 
-  setSelectedPiece, 
-  selectedTile, 
-  setSelectedTile
+  setSelectedPiece
 }) => {
-  
+
   // const [occupied, setOccupied] = useState(false)
   const [isTileSelected, setIsTileSelected] = useState(false)
+  const [selectedTile, setSelectedTile] = useState([])
   let opacity = 1.0
 
   const tileSelector = async () => {
@@ -63,6 +60,9 @@ const Square = ({
     // setTimeout(() => {test()}, 1000)
   }
 
+  useEffect(() => {
+    console.log('tile:', selectedTile[0])
+  }, [selectedTile])
 
 
 
@@ -94,9 +94,7 @@ const Square = ({
             <Piece 
               tiles={tiles} 
               num={num} 
-              pieces={pieces} 
-              selectedPiece={selectedPiece} 
-              setSelectedPiece={setSelectedPiece} />
+              pieces={pieces} />
           )
         }
       })}

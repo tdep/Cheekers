@@ -1,12 +1,7 @@
 import Square from "./Square"
 import { useState, useEffect } from "react"
 
-const Board = ({
-  selectedPiece, 
-  setSelectedPiece, 
-  selectedTile, 
-  setSelectedTile
-}) => {
+const Board = () => {
 
   const squares = [1, 2, 3, 4] //An array (squares) which is mapped over to create columns. 
   const [tiles, setTiles] = useState([])
@@ -51,11 +46,7 @@ const Board = ({
                         yAxis={yCoor} 
                         tiles={tiles} 
                         num={num} 
-                        pieces={pieces} 
-                        selectedPiece={selectedPiece} 
-                        setSelectedPiece={setSelectedPiece} 
-                        selectedTile={selectedTile} 
-                        setSelectedTile={setSelectedTile} /> 
+                        pieces={pieces} /> 
                     </>
                   )
                 })

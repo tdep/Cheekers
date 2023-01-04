@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Piece = ({
   tiles, 
   num, 
-  pieces, 
-  selectedPiece, 
-  setSelectedPiece
+  pieces
 }) => {
   
   const [isPieceSelected, setIsPieceSelected] = useState(false) //state for dom rendering
+  const [selectedPiece, setSelectedPiece] = useState([])
 
   const alreadySelected = (e) => {
     if (selectedPiece[0] === e) {
@@ -39,7 +38,12 @@ const Piece = ({
     pieceSelector()
     // setTimeout(() => {pieceSelector()}, 1000)
     setIsPieceSelected(!isPieceSelected) //state for dom rendering
+    
   }
+
+  useEffect(() => {
+    console.log('piece:', selectedPiece[0])
+  }, [selectedPiece])
   return (
     <div 
       className="piece"
