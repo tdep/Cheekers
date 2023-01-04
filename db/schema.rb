@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2023_01_02_025709) do
 
   create_table "tiles", force: :cascade do |t|
     t.boolean "occupied", default: false
+    t.boolean "selected", default: false
     t.integer "x_coordinate"
     t.integer "y_coordinate"
     t.datetime "created_at", precision: 6, null: false
