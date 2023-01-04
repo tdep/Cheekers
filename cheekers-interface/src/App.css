@@ -31,3 +31,27 @@
   justify-content: center;
   align-items: center;
 }
+
+.message-box {
+  border: 1px solid black;
+  border-radius: 3%;
+  height: 500px;
+  width: 350px;
+  overflow: auto;
+}
+
+.messages {
+  border :1px solid blue;
+  background:rgb(43, 155, 155);
+  border-radius: 2%;
+  height: auto;
+  max-width: 150px;
+  width: auto
+}
+
+.battlepage {
+  display: flex;
+  flex-direction: row
+}
+
+

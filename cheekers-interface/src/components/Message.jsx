@@ -16,10 +16,14 @@ const Message = () => {
       ws = new WebSocket("ws://localhost:3000/cable")
 
       ws.onopen = () => {
+        //when websocket opens, connect to the Live Feed channel
         console.log("websockets connectedddd")
-        ws.send(JSON.stringify({"command": "subscribe", "identifier": `{"channel": "LiveFeedChannel"}`}))
+        ws.send(JSON.stringify({"command": "subscribe", "identifier": `{"channel": "LiveMessageChannel"}`}))
       }
-
+      // Now we write a function every time you run ActionCable.server.broadcast in your Controller
+      // Ideally
+      // an if statement that handles if the event is a post being created
+      // if 
       ws.onmessage = (event) => {
         const data = JSON.parse(event.data)
         if (data.type === "ping" || data.type === "welcome" || data.type === "confirm_subscription") return;
@@ -44,21 +48,21 @@ const Message = () => {
   }
 
   return(
-    <div>
+    <div className = "message-box">
       <h3>Messages</h3>
-      <form onSubmit={handleSubmit}>
-        <input name="content" placeholder="Talk shit here..." cols="100" rows="100" />
-        <button type="submit">Send 🧌 </button>
-      </form>
       {
         messages.map((message) => {
           return(
-            <div>
-              <p>{message.message}</p>
+            <div >
+              <p className = "messages">{message.message}</p>
             </div>
           )
         })
       }
+      <form onSubmit={handleSubmit}>
+        <input name="content" placeholder="Talk shit here..." cols="100" rows="100" />
+        <button type="submit">Send 🧌 </button>
+      </form>
     </div>
   )
 

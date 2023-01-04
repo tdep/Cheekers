@@ -9,4 +9,7 @@ Rails.application.routes.draw do
 
   get '/messages', to: 'messages#index'
   post '/messages', to: 'messages#create'
+
+  get '/players', to: 'players#index'
+  post '/players', to: 'players#create'
 end
