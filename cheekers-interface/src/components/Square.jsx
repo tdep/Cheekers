@@ -3,6 +3,7 @@ import Piece from "./Piece"
 
 const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
   const [occupied, setOccupied] = useState(false)
+  const [tileSelected, setTileSelected] = useState(false)
 
   let coordinates = `(${xAxis}, ${yAxis})`
   
@@ -16,13 +17,14 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
       },
       body: JSON.stringify(tileOccupiedObject)
     })
-    let res = await req.json()
+    console.log('tile:', tiles[num])
+    // let res = await req.json()
     // if (req.ok) {
     //   console.log('response is', res)
     // } else {
     //   alert('Somting weent veerty wong')
     // }
-    setOccupied(!occupied)
+    setTileSelected(!tileSelected)
     // setTimeout(() => {test()}, 1000)
 
 
@@ -32,7 +34,7 @@ const Square = ({xAxis, yAxis, tiles, num, pieces}) => {
     <div
     className="square"
     id={coordinates} //The id of each square = the coordinate variable 
-    occupied={!occupied ? "false" : "true"} //Sets an occupied property for the element
+    select={!tileSelected ? "false" : "true"} //Sets an occupied property for the element
     onClick={handleClick}
     style={{
       background: (

@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react'
 
 const Piece = ({tiles, num, pieces}) => {
-  const [selected, setSelected] = useState(false)
+  const [pieceSelected, setPieceSelected] = useState(false) //state for dom rendering
   
   const pieceSelector = () => {
     let tileId = tiles[num].id
@@ -13,19 +13,23 @@ const Piece = ({tiles, num, pieces}) => {
       if (tileId === pieceTileId) {
         piece.selected = !piece.selected
         selectedPiece.push(piece)
-        console.log(selectedPiece[0])
+        console.log('piece:', selectedPiece[0])
       }
     })
 
-    setSelected(!selected)
+    setPieceSelected(!pieceSelected) //state for dom rendering
 
   }
   return (
     <div 
       className="piece"
-      selected={!selected ? false : true}
+      select={!pieceSelected ? "false" : "true"}
       onClick={pieceSelector}
-      id="no"
+      style={{
+        background: (
+          pieceSelected ? "darkred" : "red"
+        )
+      }}
     >
     </div>
   )
