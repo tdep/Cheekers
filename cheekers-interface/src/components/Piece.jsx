@@ -1,52 +1,51 @@
 import { useState, useEffect } from 'react'
 
-const Piece = ({ tiles, num, pieces, id }) => {
-  
-  const [selectedPiece, setSelectedPiece] = useState([])
-  let isPieceSelected = false
-  let thisPieceId = 0
+const Piece = ({ tiles, num, pieces, id, choosePiece, selectedPiece, setSelectedPiece, thisPiece}) => {
 
-  
-  const pieceSelector = () => { //click handler to pick pieces
-    let tileId = tiles[num].id
-    let tileCoord = {x:tiles[num].x_coordinate, y:tiles[num].y_coordinate}
-    
-    pieces.map((piece) => {
-      let pieceTileId = piece.tile_id
-      thisPieceId = piece.id
-      if (tileId === pieceTileId) {
-        console.log(piece)
-        // piece.selected = !piece.selected
-        // setSelectedPiece([piece])
-        // console.log(selectedPiece[0].selected)
-      }
+  const pieceUpdater = async () => {
+    let thisPieceId = selectedPiece.id
+    const pieceSelectedObject = { selected: selectedPiece.selected = !selectedPiece.selected }
+    let req = await fetch(`http://localhost:3000/pieces/${thisPieceId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pieceSelectedObject)
     })
-    //for the selected piece, if the tile at position 2 of the selected tile array
-    //property selected is false, send a patch request to change the tile_id of the 
-    //selected piece, to the id of the the tile at position 2
+    let res = await req.json()
+    if (req.ok) {
+      console.log('piece response is', res)
+    }
   }
-
-  const handlePieceClick = () => {
-    pieceSelector()
-    // console.log(selectedPiece[0]?.id)
-    // setTimeout(() => {pieceSelector()}, 1000)
+  
+  let currentPiece = (piece) => {
+    if (thisPiece.id === piece.id) {
+      return "true"
+    } else {
+      return "false"
+    }
   }
-
-  useEffect(() => {
-    // console.log('piece:', selectedPiece[0])
-  }, [selectedPiece])
-
 
   return (
 
-    <div 
-      className="piece"
-      id={id}
-      select=""
-      onClick={() => {handlePieceClick()}}
-      style={{background: ((selectedPiece[0]?.id == id) ? "darkred" : "red")}}
-    >
-    </div>
+    <>
+      {
+        pieces.map((piece) => {
+          let tileId = tiles[num].id
+          let pieceTileId = piece.tile_id
+          if (tileId === pieceTileId) { //selects the piece that is only where the mouse clicks
+            return(
+              <div 
+                className="piece"
+                id={id}
+                select={currentPiece(piece)}
+                onClick={() => {choosePiece(piece)}}
+                style={{background: (thisPiece.id===piece.id)?"darkred":"red"}}
+              >
+              </div>
+            )
+          }
+        })
+      }
+    </>
   )
 }
 

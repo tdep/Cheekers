@@ -6,7 +6,10 @@ const Board = () => {
   const squares = [1, 2, 3, 4] //An array (squares) which is mapped over to create columns. 
   const [tiles, setTiles] = useState([])
   const [pieces, setPieces] = useState([])
+  const [thisPiece, setThisPiece] = useState({id: null, select: "false"})
+  const [thatPiece, setThatPiece] = useState({id: null, select: "false"})
   let num = -1
+
 
   useEffect(() =>{
     const request = async () => {
@@ -26,6 +29,19 @@ const Board = () => {
     request()
   }, [])
   
+  const choosePiece = (piece) => {
+    if (thisPiece.id !== piece.id) {
+      setThisPiece({id: piece.id, select: "true"})
+      console.log(thisPiece)
+      return thisPiece
+    } else if (thisPiece.id === piece.id) {
+      setThatPiece({id: thisPiece.id, select: "false"})
+      setThisPiece({id: null, select: "false"})
+      console.log(thisPiece)
+      return thisPiece
+    }
+  }
+
   return (
     <div className="play-board">
       {
@@ -46,7 +62,10 @@ const Board = () => {
                         yAxis={yCoor} 
                         tiles={tiles} 
                         num={num} 
-                        pieces={pieces} /> 
+                        pieces={pieces}
+                        thisPiece={thisPiece}
+                        thatPiece={thatPiece}
+                        choosePiece={choosePiece} /> 
                     </>
                   )
                 })

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import Piece from "./Piece"
 
-const Square = ({ xAxis, yAxis, tiles, num, pieces }) => {
+const Square = ({ xAxis, yAxis, tiles, num, pieces, thisPiece, choosePiece }) => {
 
   // const [occupied, setOccupied] = useState(false)
   const [isTileSelected, setIsTileSelected] = useState(false)
   const [selectedTile, setSelectedTile] = useState([])
+  const [selectedPiece, setSelectedPiece] = useState([])
+  const [prevSelectedPiece, setPrevSelectedPiece] = useState([])
+
   let opacity = 1.0
 
   const tileSelector = async () => {
@@ -35,8 +38,6 @@ const Square = ({ xAxis, yAxis, tiles, num, pieces }) => {
       tileSelector()
     }
   }
-  
-
 
   const mouseOver = (e) => { //change tile opacity on mouseOver
     e.target.style.opacity = (opacity - 0.2)
@@ -53,9 +54,8 @@ const Square = ({ xAxis, yAxis, tiles, num, pieces }) => {
   }
 
   useEffect(() => {
-    // console.log('tile:', selectedTile[0])
-  }, [selectedTile])
 
+  }, [selectedTile])
 
 
   return ( 
@@ -87,7 +87,12 @@ const Square = ({ xAxis, yAxis, tiles, num, pieces }) => {
               tiles={tiles} 
               num={num} 
               pieces={pieces}
-              id={piece.id} />
+              id={piece.id}
+              selectedPiece={selectedPiece}
+              setSelectedPiece={setSelectedPiece}
+              thisPiece={thisPiece}
+              choosePiece={choosePiece}
+ />
           )
         }
       })}
