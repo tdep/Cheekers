@@ -22,7 +22,7 @@ function App() {
           <Route path="playertwo" element={<PlayerTwoPage setPlayerTwo={setPlayerTwo}/>}/>
           
 
-          <Route path="players/game" element={<BattlePage playerOne={playerOne} playerTwo={playerTwo} />}/>
+          <Route path="/game" element={<BattlePage playerOne={playerOne} playerTwo={playerTwo} />}/>
       </Routes>
     </BrowserRouter>
     // <div >
