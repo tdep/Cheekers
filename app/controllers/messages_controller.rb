@@ -6,8 +6,9 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.create!(message: params[:message])
-    ActionCable.server.broadcast('live_message', {
-    post: message
+    #  player: params[:player_id]
+    ActionCable.server.broadcast('live_message',
+    {post: message
   })
     render json: message
   end

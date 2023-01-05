@@ -1,3 +1,3 @@
 class Message < ApplicationRecord
-  has_many :messages
+  # belongs_to :player
 end

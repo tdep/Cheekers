@@ -1,11 +1,11 @@
+// import {useState} from 'react'
 
+// const PlayerOne = ({playerId}) => {
 
-const PlayerOne = () => {
+//   const [playerId, setPlayerId]= useState(1) 
+//   return(
+//     <></>
+//   )
+// }
 
-  let player_id = 1
-  return(
-    <></>
-  )
-}
-
-export default PlayerOne
+// export default PlayerOne

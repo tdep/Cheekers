@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2023_01_03_232832) do
 
   create_table "messages", force: :cascade do |t|
     t.text "message"
+    t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -22,7 +23,7 @@ ActiveRecord::Schema.define(version: 2023_01_03_232832) do
     t.boolean "active"
     t.boolean "king"
     t.integer "tile_id"
-    t.string "player_id"
+    t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

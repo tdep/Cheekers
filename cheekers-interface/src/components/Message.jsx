@@ -2,6 +2,18 @@ import {useEffect, useState } from 'react'
 
 const Message = () => {
   const [messages, setMessages] = useState ([])
+  const [player, setPlayer] = useState([])
+
+  useEffect (() => {
+    const getPlayers = async () => {
+      let req = await fetch("http://localhost:3000/players")
+      let res = await req.json()
+      console.log(res)
+      setPlayer(res)
+    }
+    getPlayers()
+    
+  },[])
 
   useEffect (() => {
     let ws;
@@ -34,6 +46,7 @@ const Message = () => {
           })
       }
     }
+    
     getMessages()
     connect ()
   }, [])
@@ -49,20 +62,26 @@ const Message = () => {
 
   return(
     <div className = "message-box">
-      <h3>Messages</h3>
-      {
-        messages.map((message) => {
-          return(
-            <div >
-              <p className = "messages">{message.message}</p>
-            </div>
-          )
-        })
-      }
-      <form onSubmit={handleSubmit}>
+      <div className="top-msg-box">
+        <h3>Messages</h3>
+      </div>
+      <div className="chats">
+        {
+          messages.map((message) => {
+            return(
+              <div >
+                <p className = "messages">{message.message}</p>
+              </div>
+            )
+          })
+        }
+      </div>
+      <div className="messege-sender" >
+      <form  onSubmit={handleSubmit}>
         <input name="content" placeholder="Talk shit here..." cols="100" rows="100" />
         <button type="submit">Send 🧌 </button>
       </form>
+      </div>
     </div>
   )
 
