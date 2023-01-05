@@ -8,12 +8,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 function App() {
 
+  const [playerOne, setPlayerOne] = useState([])
+  const [playerTwo, setPlayerTwo] = useState([])
+
+
   return (
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<StartPage />}/>
-          <Route path="players" element={<PlayerPage />}/>
-          <Route path="players/game" element={<BattlePage />}/>
+          <Route path="players" element={<PlayerPage setPlayerOne={setPlayerOne} setPlayerTwo={setPlayerTwo}/>}/>
+          <Route path="players/game" element={<BattlePage playerOne={playerOne} playerTwo={playerTwo} />}/>
       </Routes>
     </BrowserRouter>
     // <div >

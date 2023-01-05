@@ -38,13 +38,18 @@
   /* max-height: 660px; */
   height: 330px;
   width: 350px;
-  overflow: auto;
+  background-color: #ce9db5
+  
 }
 .top-msg-box{
- 
+  position: sticky;
+  display: flex;
+  justify-content: center
 }
 .chats{
-
+  max-height: 225px;
+  overflow: auto;
+  padding: 2%
 }
 .messages{
   border :1px solid blue;
@@ -52,9 +57,13 @@
   border-radius: 2%;
   height: auto;
   max-width: 150px;
-  width: auto
+  width: auto;
+  padding: 2%
 }
 .message-sender{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%
   
 }
 .battlepage{

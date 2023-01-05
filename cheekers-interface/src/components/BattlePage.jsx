@@ -1,11 +1,12 @@
 import Board from './Board'
 import Message from './Message'
 
-const BattlePage = () => {
+const BattlePage = ({playerOne, playerTwo}) => {
+  console.log(playerOne, playerTwo)
   return(
     <div className="battlepage">
       <Board />
-      <Message />
+      <Message playerOne={playerOne} playerTwo={playerTwo}/>
     </div>
   )
 }

@@ -1,20 +1,8 @@
 import {useEffect, useState } from 'react'
 
-const Message = () => {
+const Message = ({playerOne, playerTwo}) => {
   const [messages, setMessages] = useState ([])
-  const [player, setPlayer] = useState([])
-
-  useEffect (() => {
-    const getPlayers = async () => {
-      let req = await fetch("http://localhost:3000/players")
-      let res = await req.json()
-      console.log(res)
-      setPlayer(res)
-    }
-    getPlayers()
-    
-  },[])
-
+  
   useEffect (() => {
     let ws;
     const getMessages = async () => {
@@ -22,11 +10,11 @@ const Message = () => {
       let res = await req.json()
       setMessages(res)
     }
-
+    
     const connect = async () => {
-
+      
       ws = new WebSocket("ws://localhost:3000/cable")
-
+      
       ws.onopen = () => {
         //when websocket opens, connect to the Live Feed channel
         console.log("websockets connectedddd")
@@ -41,12 +29,11 @@ const Message = () => {
         if (data.type === "ping" || data.type === "welcome" || data.type === "confirm_subscription") return;
         console.log ('data', data)
         let newMessage = data.message.post
-          setMessages((prevState) => {
-            return [newMessage, ...prevState]
-          })
+        setMessages((prevState) => {
+          return [...prevState, newMessage]
+        })
       }
     }
-    
     getMessages()
     connect ()
   }, [])
@@ -56,7 +43,11 @@ const Message = () => {
     let req = await fetch ("http://localhost:3000/messages", {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({message: e.target.content.value})
+      body: JSON.stringify({
+        message: e.target.content.value,
+        player_id: playerOne.id,
+        name: playerOne.name
+      })
     })
   }
 
@@ -70,7 +61,7 @@ const Message = () => {
           messages.map((message) => {
             return(
               <div >
-                <p className = "messages">{message.message}</p>
+                <p className = "messages">Player {message.player_id}: {message.message}</p>
               </div>
             )
           })

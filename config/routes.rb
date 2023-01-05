@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   post '/messages', to: 'messages#create'
 
   get '/players', to: 'players#index'
-  patch '/players/:id', to: 'players#update'
+  post '/players', to: 'players#create'
   delete '/players/:id', to: 'players#delete'
 end

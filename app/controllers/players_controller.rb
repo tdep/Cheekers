@@ -4,9 +4,8 @@ class PlayersController < ApplicationController
     render json: Player.all
   end
 
-  def update 
-    player = Player.find_by!(id: params[:id])
-    player.update(name: params[:name])
+  def create 
+    player = Player.create!(id: params[:id], name: params[:name], number: params[:number], number_pieces: params[:number_pieces])
     render json: player
   end
   
