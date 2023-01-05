@@ -5,7 +5,7 @@ class CreatePieces < ActiveRecord::Migration[6.1]
       t.boolean :king, default: false
       t.boolean :selected, default: false
       t.integer :tile_id
-      t.string :player_id
+      t.integer :player_id
 
       t.timestamps
     end
