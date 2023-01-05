@@ -2,19 +2,16 @@ import Square from "./Square"
 import { useState, useEffect } from "react"
 
 const Board = () => {
+
   const squares = [1, 2, 3, 4] //An array (squares) which is mapped over to create columns. 
-  // const [occupied, setOccupied] = useState(false) //A state variable set to false in order to represent whether a square is occupied
-  // const handleClick = (e) => { //Used to set whether a square is occupied or not
-  //   setOccupied(!occupied)
-  //   return (
-  //     <>
-  //       {occupied}
-  //     </>
-  //   )
-  // }
   const [tiles, setTiles] = useState([])
   const [pieces, setPieces] = useState([])
+  const [thisPiece, setThisPiece] = useState({id: null, select: "false"})
+  const [thatPiece, setThatPiece] = useState({id: null, select: "false"})
+  const [thisTile, setThisTile] = useState({})
+  const [thatTile, setThatTile] = useState({})
   let num = -1
+
 
   useEffect(() =>{
     const request = async () => {
@@ -34,6 +31,32 @@ const Board = () => {
     request()
   }, [])
   
+  const choosePiece = (piece) => {
+    if (thisPiece.id !== piece.id) {
+      setThisPiece({id: piece.id, select: "true"})
+      console.log(thisPiece)
+      return thisPiece
+    } else if (thisPiece.id === piece.id) {
+      setThatPiece({id: thisPiece.id, select: "false"})
+      setThisPiece({id: null, select: "false"})
+      console.log(thisPiece)
+      return thisPiece
+    }
+  }
+
+  const chooseTile = (tile) => {
+    if (thisTile.id !== tile.id) {
+      setThisTile({})
+      console.log(thisTile)
+      return thisTile
+    } else if (thisTile.id === tile.id) {
+      setThatTile({})
+      setThisTile({})
+      console.log(thisTile)
+      return thisTile
+    }
+  }
+
   return (
     <div className="play-board">
       {
@@ -49,7 +72,16 @@ const Board = () => {
                   { num += 1 }
                   return(
                     <>
-                      <Square xAxis={xCoor} yAxis={yCoor} tiles={tiles} num={num} pieces={pieces}/> 
+                      <Square 
+                        xAxis={xCoor} 
+                        yAxis={yCoor} 
+                        tiles={tiles} 
+                        num={num} 
+                        pieces={pieces}
+                        thisPiece={thisPiece}
+                        thatPiece={thatPiece}
+                        choosePiece={choosePiece}
+                        chooseTile={chooseTile} /> 
                     </>
                   )
                 })

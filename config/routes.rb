@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   patch '/tiles/:id', to: 'tiles#update'
 
   get '/pieces', to: 'pieces#index'
+  patch '/pieces/:id', to: 'pieces#update'
 end

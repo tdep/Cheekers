@@ -1,35 +1,52 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
-const Piece = ({tiles, num, pieces}) => {
-  const [selected, setSelected] = useState(false)
-  
-  const pieceSelector = () => {
-    let tileId = tiles[num].id
-    let tileCoord = {x:tiles[num].x_coordinate, y:tiles[num].y_coordinate}
-    
-    pieces.map((piece) => {
-      let selectedPiece = []
-      let pieceTileId = piece.tile_id
-      if (tileId === pieceTileId) {
-        piece.selected = !piece.selected
-        selectedPiece.push(piece)
-        console.log(selectedPiece[0])
-      }
+const Piece = ({ tiles, num, pieces, id, choosePiece, selectedPiece, setSelectedPiece, thisPiece}) => {
+
+  const pieceUpdater = async () => {
+    let thisPieceId = selectedPiece.id
+    const pieceSelectedObject = { selected: selectedPiece.selected = !selectedPiece.selected }
+    let req = await fetch(`http://localhost:3000/pieces/${thisPieceId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pieceSelectedObject)
     })
-
-    setSelected(!selected)
-
+    let res = await req.json()
+    if (req.ok) {
+      console.log('piece response is', res)
+    }
   }
+  
+  let currentPiece = (piece) => {
+    if (thisPiece.id === piece.id) {
+      return "true"
+    } else {
+      return "false"
+    }
+  }
+
   return (
-    <div 
-      className="piece"
-      selected={!selected ? false : true}
-      onClick={pieceSelector}
-      id="no"
-    >
-    </div>
+
+    <>
+      {
+        pieces.map((piece) => {
+          let tileId = tiles[num].id
+          let pieceTileId = piece.tile_id
+          if (tileId === pieceTileId) { //selects the piece that is only where the mouse clicks
+            return(
+              <div 
+                className="piece"
+                id={id}
+                select={currentPiece(piece)}
+                onClick={() => {choosePiece(piece)}}
+                style={{background: (thisPiece.id===piece.id)?"darkred":"red"}}
+              >
+              </div>
+            )
+          }
+        })
+      }
+    </>
   )
 }
 
 export default Piece
-// setTimeout(() => {grabPiece()}, 1000)
