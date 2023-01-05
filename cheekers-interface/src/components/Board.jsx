@@ -8,6 +8,8 @@ const Board = () => {
   const [pieces, setPieces] = useState([])
   const [thisPiece, setThisPiece] = useState({id: null, select: "false"})
   const [thatPiece, setThatPiece] = useState({id: null, select: "false"})
+  const [thisTile, setThisTile] = useState({})
+  const [thatTile, setThatTile] = useState({})
   let num = -1
 
 
@@ -42,6 +44,19 @@ const Board = () => {
     }
   }
 
+  const chooseTile = (tile) => {
+    if (thisTile.id !== tile.id) {
+      setThisTile({})
+      console.log(thisTile)
+      return thisTile
+    } else if (thisTile.id === tile.id) {
+      setThatTile({})
+      setThisTile({})
+      console.log(thisTile)
+      return thisTile
+    }
+  }
+
   return (
     <div className="play-board">
       {
@@ -65,7 +80,8 @@ const Board = () => {
                         pieces={pieces}
                         thisPiece={thisPiece}
                         thatPiece={thatPiece}
-                        choosePiece={choosePiece} /> 
+                        choosePiece={choosePiece}
+                        chooseTile={chooseTile} /> 
                     </>
                   )
                 })

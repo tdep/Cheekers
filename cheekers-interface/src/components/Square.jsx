@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import Piece from "./Piece"
 
-const Square = ({ xAxis, yAxis, tiles, num, pieces, thisPiece, choosePiece }) => {
+const Square = ({ xAxis, yAxis, tiles, num, pieces, thisPiece, choosePiece, chooseTile }) => {
 
   // const [occupied, setOccupied] = useState(false)
   const [isTileSelected, setIsTileSelected] = useState(false)
   const [selectedTile, setSelectedTile] = useState([])
   const [selectedPiece, setSelectedPiece] = useState([])
-  const [prevSelectedPiece, setPrevSelectedPiece] = useState([])
 
   let opacity = 1.0
 
