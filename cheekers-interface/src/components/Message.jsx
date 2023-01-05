@@ -69,7 +69,7 @@ const Message = ({playerOne, playerTwo}) => {
       </div>
       <div className="messege-sender" >
       <form  onSubmit={handleSubmit}>
-        <input name="content" placeholder="Talk shit here..." cols="100" rows="100" />
+        <input className="input" name="content" placeholder="Talk shit here..." cols="100" rows="100" />
         <button type="submit">Send 🧌 </button>
       </form>
       </div>
