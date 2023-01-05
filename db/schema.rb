@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 2023_01_03_232832) do
   end
 
   create_table "pieces", force: :cascade do |t|
-    t.boolean "active"
-    t.boolean "king"
+    t.boolean "active", default: true
+    t.boolean "king", default: false
+    t.boolean "selected", default: false
     t.integer "tile_id"
     t.integer "player_id"
     t.datetime "created_at", precision: 6, null: false
@@ -37,7 +38,8 @@ ActiveRecord::Schema.define(version: 2023_01_03_232832) do
   end
 
   create_table "tiles", force: :cascade do |t|
-    t.boolean "occupied"
+    t.boolean "occupied", default: false
+    t.boolean "selected", default: false
     t.integer "x_coordinate"
     t.integer "y_coordinate"
     t.datetime "created_at", precision: 6, null: false

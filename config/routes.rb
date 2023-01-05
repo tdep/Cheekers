@@ -7,10 +7,14 @@ Rails.application.routes.draw do
 
   get '/pieces', to: 'pieces#index'
 
+
   get '/messages', to: 'messages#index'
   post '/messages', to: 'messages#create'
 
   get '/players', to: 'players#index'
   post '/players', to: 'players#create'
   delete '/players/:id', to: 'players#delete'
+
+  patch '/pieces/:id', to: 'pieces#update'
+
 end

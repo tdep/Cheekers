@@ -24,7 +24,6 @@
 .piece{
   border: 1px solid black;
   border-radius: 50%;
-  background: red;
   height: 4.5rem;
   width: 4.5rem;
   text-align: center;
