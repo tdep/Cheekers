@@ -2,7 +2,8 @@ import {useEffect, useState } from 'react'
 
 const Message = ({players, currentPlayer}) => {
   const [messages, setMessages] = useState ([])
-  console.log(currentPlayer)
+  const playerName = currentPlayer.name
+
 
   useEffect (() => {
     let ws;
@@ -47,7 +48,7 @@ const Message = ({players, currentPlayer}) => {
       body: JSON.stringify({
         message: e.target.content.value,
         player_id: currentPlayer.id,
-        name: currentPlayer.name
+        name: playerName
       })
     })
   }
@@ -60,7 +61,6 @@ const Message = ({players, currentPlayer}) => {
       <div className="chats">
         {
           messages.map((message) => {
-            console.log(message)
             return(
               <div >
                 <p className = "messages">{message.name}: {message.message}</p>
