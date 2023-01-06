@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import React from "react"
 import './App.css'
 
-import StartPage from './components/StartPage'
-import Login from "./components/Login"
+import StartPage from './components/defunct/StartPage'
 import BattlePage from "./components/BattlePage"
 import { 
   BrowserRouter, 
@@ -31,7 +30,6 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        {/* <Route path="/" element={<Login  players={players} setLoggedIn={setLoggedIn} currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}/>} /> */}
         <Route path="/game" element={<BattlePage players={players} loggedIn={loggedIn} setLoggedIn={setLoggedIn} currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer} />} />
       </Routes>
     </BrowserRouter>
