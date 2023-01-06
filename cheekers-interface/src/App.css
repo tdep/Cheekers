@@ -79,7 +79,8 @@
 .start-page{
   display: flex;
   justify-content: center;
-  font-size: 120px
+  font-size: 120px;
+  margin: 0
 }
 .start-btn{
   border: 5px solid cadetblue;
@@ -104,6 +105,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.input-field{
+  margin: 2em auto 3em auto
 }
 .player-font{
   font-family: Luminari

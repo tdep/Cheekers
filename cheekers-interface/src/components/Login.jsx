@@ -26,13 +26,23 @@ const Login = ({ players, setLoggedIn, currentPlayer, setCurrentPlayer }) => {
 
 
   return (
-    <div className="login">
-      <form className='login-form' onSubmit={e => handleSubmit(e)}>
-        <h2>Login</h2>
-        <input type='text' placeholder='Name' value={formData.name} name='name' onChange={e => handleChange(e)} ></input>
-        <button className='login-btn' type='submit'>Login</button>
-      </form>
-      <Link to="game">TO Game</Link>
+    <div className="start">
+      <div className="player-page">
+        <div className="player-holder">
+          <div className="player-name">
+            <form className='login-form' onSubmit={e => handleSubmit(e)}>
+              <h2 className="start-page">CHEEKERS</h2>
+              <input className="input-field" type='text' placeholder='Name' value={formData.name} name='name' onChange={e => handleChange(e)} ></input>
+              <button className='start-btn' type='submit'>Play</button>
+            </form>
+            <Link to="game">TO Game</Link>
+
+          </div>
+
+        </div>
+
+
+      </div>
     </div>
   )
 }
