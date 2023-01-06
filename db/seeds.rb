@@ -27,8 +27,8 @@ Tile.create(x_coordinate: 4, y_coordinate: 4)
 
 
 # player_id = player.id
-player1 = Player.create(name: 'Jorb', number: 1, number_pieces: 1)
-player2 = Player.create(name: 'Plorp', number: 2, number_pieces: 1)
+player1 = Player.create(name: 'Blorp', number: 1)
+player2 = Player.create(name: 'Goorb', number: 2)
 
 
 Piece.create(tile_id: 2, player_id: 1)
