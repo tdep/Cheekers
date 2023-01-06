@@ -1,34 +1,37 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from "react"
-import BattlePage from './components/BattlePage'
-import StartPage from './components/StartPage'
-import PlayerOnePage from './components/PlayerOnePage'
-import PlayerTwoPage from './components/PlayerTwoPage'
-import PlayerPage from './components/PlayerPage'
 import './App.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-function App() {
+import Login from "./components/Login"
+import BattlePage from "./components/BattlePage"
+import { 
+  BrowserRouter, 
+  Routes, 
+  Route 
+} from "react-router-dom"
 
-  const [playerOne, setPlayerOne] = useState([])
-  const [playerTwo, setPlayerTwo] = useState([])
+const App = () => {
+  const [players, setPlayers] = useState([])
+  const [currentPlayer, setCurrentPlayer] = useState([])
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+    let request = async () => {
+      let req = await fetch("http://localhost:3000/players")
+      let res = await req.json()
+      setPlayers(res)
+    }
+    request()
+  }, [setPlayers])
 
 
   return (
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<StartPage />}/>
-          <Route path="playerone" element={<PlayerOnePage setPlayerOne={setPlayerOne} />}/>
-          <Route path="playertwo" element={<PlayerTwoPage setPlayerTwo={setPlayerTwo}/>}/>
-          
-
-          <Route path="players/game" element={<BattlePage playerOne={playerOne} playerTwo={playerTwo} />}/>
+        <Route path="/" element={<Login  players={players} setLoggedIn={setLoggedIn} currentPlayer={currentPlayer} setCurrentPlayer={setCurrentPlayer}/>} />
+        <Route path="/game" element={<BattlePage players={players} loggedIn={loggedIn} currentPlayer={currentPlayer} />} />
       </Routes>
     </BrowserRouter>
-    // <div >
-    //   {/* <Board /> */}
-    //   <Message />
-    // </div>
   )
 }
 

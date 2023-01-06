@@ -1,8 +1,9 @@
 import {useEffect, useState } from 'react'
 
-const Message = ({playerOne, playerTwo}) => {
+const Message = ({players, currentPlayer}) => {
   const [messages, setMessages] = useState ([])
-  
+  console.log(currentPlayer)
+
   useEffect (() => {
     let ws;
     const getMessages = async () => {
@@ -45,8 +46,8 @@ const Message = ({playerOne, playerTwo}) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         message: e.target.content.value,
-        player_id: playerOne.id,
-        name: playerOne.name
+        player_id: currentPlayer.id,
+        name: currentPlayer.name
       })
     })
   }
@@ -59,9 +60,10 @@ const Message = ({playerOne, playerTwo}) => {
       <div className="chats">
         {
           messages.map((message) => {
+            console.log(message)
             return(
               <div >
-                <p className = "messages">Player {message.player_id}: {message.message}</p>
+                <p className = "messages">{message.name}: {message.message}</p>
               </div>
             )
           })
