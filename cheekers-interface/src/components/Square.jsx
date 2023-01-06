@@ -56,7 +56,6 @@ const Square = ({ xAxis, yAxis, tiles, num, pieces, thisPiece, choosePiece, choo
 
   }, [selectedTile])
 
-
   return ( 
 
     
@@ -95,6 +94,7 @@ const Square = ({ xAxis, yAxis, tiles, num, pieces, thisPiece, choosePiece, choo
           )
         }
       })}
+      
     </div>
 
 

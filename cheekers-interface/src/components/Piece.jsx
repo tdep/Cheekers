@@ -38,7 +38,7 @@ const Piece = ({ tiles, num, pieces, id, choosePiece, selectedPiece, setSelected
                 id={id}
                 select={currentPiece(piece)}
                 onClick={() => {choosePiece(piece)}}
-                style={{background: (thisPiece.id===piece.id)?"darkred":"red"}}
+                style={{background: (piece.player_id === 2)?((thisPiece.id===piece.id)?"darkgreen":"green"):((thisPiece.id===piece.id)?"darkred":"red")}}
               >
               </div>
             )

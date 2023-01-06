@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 const Board = () => {
 
-  const squares = [1, 2, 3, 4] //An array (squares) which is mapped over to create columns. 
+  const squares = [1, 2, 3, 4, 5, 6, 7, 8] //An array (squares) which is mapped over to create columns. 
   const [tiles, setTiles] = useState([])
   const [pieces, setPieces] = useState([])
   const [thisPiece, setThisPiece] = useState({id: null, select: "false"})
@@ -20,7 +20,7 @@ const Board = () => {
       setTiles(res)
     }
     request()
-  }, [])
+  }, [setTiles])
 
   useEffect(() => {
     const request = async () => {
