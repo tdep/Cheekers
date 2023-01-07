@@ -6,10 +6,11 @@ const Board = () => {
   const squares = [1, 2, 3, 4, 5, 6, 7, 8] //An array (squares) which is mapped over to create columns. 
   const [tiles, setTiles] = useState([])
   const [pieces, setPieces] = useState([])
-  const [thisPiece, setThisPiece] = useState({id: null, select: "false"})
+  const [thisPiece, setThisPiece] = useState({id: null, select: "false", tile_id: null})
   const [thatPiece, setThatPiece] = useState({id: null, select: "false"})
-  const [thisTile, setThisTile] = useState({})
-  const [thatTile, setThatTile] = useState({})
+  const [currentPiece, setCurrentPiece] = useState({tile_id: null, piece_id: null})
+  const [thisTile, setThisTile] = useState({ id: null, select: "false" })
+  const [thatTile, setThatTile] = useState({ id: null, select: "false" })
   let num = -1
 
 
@@ -31,29 +32,35 @@ const Board = () => {
     request()
   }, [])
   
+  //selection logic
   const choosePiece = (piece) => {
     if (thisPiece.id !== piece.id) {
       setThisPiece({id: piece.id, select: "true"})
-      console.log(thisPiece)
+      movePiece()
       return thisPiece
     } else if (thisPiece.id === piece.id) {
       setThatPiece({id: thisPiece.id, select: "false"})
       setThisPiece({id: null, select: "false"})
-      console.log(thisPiece)
       return thisPiece
     }
   }
 
-  const chooseTile = (tile) => {
-    if (thisTile.id !== tile.id) {
-      setThisTile({})
+  const movePiece = () => {
+    if (thisPiece.select) {
+      console.log(currentPiece)
       console.log(thisTile)
+
+    }
+  }
+
+  const chooseTile = (e) => {
+    setThisTile({id: e.target.id, select: e.target.select})
+    console.log(thisTile, thatTile)
+    if (thatTile.id !== thisTile.id) {
+      setThatTile({id: thisTile.id, select: "true"})
       return thisTile
-    } else if (thisTile.id === tile.id) {
-      setThatTile({})
-      setThisTile({})
-      console.log(thisTile)
-      return thisTile
+    } else if (thatTile.id === thisTile.id) {
+      setThatTile({id: null, select: "false"})
     }
   }
 
@@ -81,7 +88,9 @@ const Board = () => {
                         thisPiece={thisPiece}
                         thatPiece={thatPiece}
                         choosePiece={choosePiece}
-                        chooseTile={chooseTile} /> 
+                        chooseTile={chooseTile}
+                        thisTile={thisTile}
+                        thatTile={thatTile} /> 
                     </>
                   )
                 })

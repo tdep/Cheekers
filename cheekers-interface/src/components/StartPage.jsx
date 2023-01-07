@@ -5,8 +5,7 @@ const StartPage = () => {
     <>
     <div className="start">
       <h2 className="start-page">CHEEKERS</h2>
-      <Link to="playerone" className="start-btn">Get Started Player 1</Link>
-      <Link to="playertwo" className="start-btn">Get Started Player 2</Link>
+      <Link to="game" className="start-btn">Play!</Link>
 
     </div>
     </>
