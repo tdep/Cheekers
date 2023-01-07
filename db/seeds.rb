@@ -28,6 +28,10 @@ player2 = Player.create(name: 'Goorb', number: 2)
 
 #Pieces
 
+tile_id = 1
+player_id = 1
+
+
 Piece.create(tile_id: 2, player_id: 2)
 Piece.create(tile_id: 9, player_id: 2)
 Piece.create(tile_id: 11, player_id: 2)
