@@ -1,7 +1,7 @@
 # README
 ## Cheekers
 
-Cheekers is an attempt to build a Checkers type game using React and Ruby on Rails.
+Cheekers is an attempt to build a Checkers type game using React and Ruby on Rails. It was a project by Cooper Hall and Trevor DePew for Flatiron School Software Engineering program phase-3.
 
 At this time, it is not playable, but it does have a fully functioning backend using Ruby, a pretty good looking front-end using React, and perhaps best of all, a fully functioning live-chat feature using websockets. 
 
